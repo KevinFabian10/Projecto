@@ -1,0 +1,81 @@
+
+Setting environment for using XAMPP for Windows.
+HP@DESKTOP-0SVAUQU c:\xampp
+# mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 20
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE Ejemploa_Clase;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> use Ejemplo_Clase;
+ERROR 1049 (42000): Unknown database 'ejemplo_clase'
+MariaDB [(none)]> use Ejemploa_Clase
+Database changed
+MariaDB [Ejemploa_Clase]> CREATE TABLE Usuarios (
+    ->     usu_id INT NOT NULL AUTO_INCREMENT,
+    ->     usu_nom TEXT NOT NULL,
+    ->     usu_apep TEXT,
+    ->     usu_apem TEXT,
+    ->     usu_correo TEXT,
+    ->     usu_pass TEXT,
+    ->     usu_telf TEXT,
+    ->     est INT,
+    ->     PRIMARY KEY (usu_id)
+    -> );
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [Ejemploa_Clase]> CREATE TABLE Social_Media (
+    ->     socmed_id INT NOT NULL AUTO_INCREMENT,
+    ->     socmed_icono VARCHAR(80),
+    ->     socmed_url TEXT,
+    ->     est INT,
+    ->     PRIMARY KEY (socmed_id)
+    -> );
+Query OK, 0 rows affected (0.030 sec)
+
+MariaDB [Ejemploa_Clase]>
+MariaDB [Ejemploa_Clase]> CREATE TABLE Menu (
+    ->     id INT NOT NULL AUTO_INCREMENT,
+    ->     opcion TEXT,
+    ->     url TEXT,
+    ->     est INT,
+    ->     PRIMARY KEY (id)
+    -> );
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [Ejemploa_Clase]> CREATE TABLE Usuario_Social_Media (
+    ->     id INT NOT NULL AUTO_INCREMENT,
+    ->     usu_id INT NOT NULL,
+    ->     socmed_id INT NOT NULL,
+    ->     PRIMARY KEY (id),
+    ->     FOREIGN KEY (usu_id) REFERENCES Usuarios(usu_id),
+    ->     FOREIGN KEY (socmed_id) REFERENCES Social_Media(socmed_id)
+    -> );
+Query OK, 0 rows affected (0.050 sec)
+
+MariaDB [Ejemploa_Clase]> CREATE TABLE Permisos_Menu (
+    ->     id INT NOT NULL AUTO_INCREMENT,
+    ->     usu_id INT NOT NULL,
+    ->     menu_id INT NOT NULL,
+    ->     permiso_tipo VARCHAR(20), -- Define si es 'lectura', 'escritura', etc.
+    ->     PRIMARY KEY (id),
+    ->     FOREIGN KEY (usu_id) REFERENCES Usuarios(usu_id),
+    ->     FOREIGN KEY (menu_id) REFERENCES Menu(id)
+    -> );
+Query OK, 0 rows affected (0.043 sec)
+
+MariaDB [Ejemploa_Clase]> CREATE TABLE Roles (
+    ->     rol_id INT NOT NULL AUTO_INCREMENT,
+    ->     nombre_rol VARCHAR(50) NOT NULL,
+    ->     descripcion TEXT,
+    ->     PRIMARY KEY (rol_id)
+    -> );
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [Ejemploa_Clase]>
