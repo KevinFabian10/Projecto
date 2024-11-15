@@ -1,3 +1,23 @@
+<?php
+// Define la URL base para redirección (ajusta según la estructura de tu proyecto)
+define("BASE_URL", "/tallerPagina/views/");
+
+// Inicia la sesión si aún no está iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Incluye el archivo de conexión
+require_once("../config/conexion.php");
+
+// Verifica si el usuario está logueado
+if (!isset($_SESSION["usu_id"])) {
+    // Si no está logueado, redirige a la página de inicio de sesión
+    header("Location: " . BASE_URL . "login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

@@ -1,3 +1,11 @@
+<?php
+define("BASE_URL", "/Practica_Proyecto/views/");
+/* Llamamos al archivo de conexion.php */
+require_once("../config/conexion.php");
+if(isset($_SESSION["usu_id"])) {
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,4 +96,16 @@
 
 
 </body>
+<?php
+session_start();
+require_once("../config/conexion.php");
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION["usu_id"])) {
+    // Si no ha iniciado sesión, redirigir a la página de error
+    header("Location: " . BASE_URL . "views/404.php");
+    exit();
+}
+?>
+
 </html>

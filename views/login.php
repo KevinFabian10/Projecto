@@ -1,3 +1,14 @@
+<?php
+session_start();
+require_once("../config/conexion.php");
+
+if (isset($_POST["enviar"]) && $_POST["enviar"] == "si") {
+  require_once("../models/Usuario.php");
+    $usuario = new Usuario();
+    $usuario->login();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,9 +35,9 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Inicia sesión para iniciar tu sesión</p>
 
-      <form action="#" method="post">
+      <form action="login.php" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Correo electrónico">
+          <input type="email" name="correo" class="form-control" placeholder="Correo electrónico" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,7 +45,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Contraseña">
+          <input type="password" name="passwd" class="form-control" placeholder="Contraseña" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -51,10 +62,33 @@
             </div>
           </div>
           <div class="col-4">
+            <input type="hidden" name="enviar" value="si">
             <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
           </div>
         </div>
       </form>
+
+      <!-- Alertas de error -->
+      <?php
+      if (isset($_GET["m"])) {
+          switch ($_GET["m"]) {
+              case "1":
+                  ?>
+                  <div class="alert alert-danger" role="alert">
+                      Los datos ingresados son incorrectos!
+                  </div>
+                  <?php
+                  break;
+              case "2":
+                  ?>
+                  <div class="alert alert-warning" role="alert">
+                      El formulario tiene los campos vacíos!
+                  </div>
+                  <?php
+                  break;
+          }
+      }
+      ?>
 
       <div class="social-auth-links text-center mb-3">
         <p>- O -</p>
