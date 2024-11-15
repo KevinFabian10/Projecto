@@ -1,10 +1,14 @@
 <?php
-define("BASE_URL", "/Practica_Proyecto/views/");
-/* Llamamos al archivo de conexion.php */
+define("BASE_URL", "/tallerPagina/views/"); // Ajusta BASE_URL según la estructura de tu proyecto
 require_once("../config/conexion.php");
-if(isset($_SESSION["usu_id"])) {
+
+if (!isset($_SESSION["usu_id"])) {
+    // Redirige a una página de error o a la página de inicio de sesión si el usuario no está logueado
+    header("Location: " . BASE_URL . "404.php");
+    exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -109,3 +113,8 @@ if (!isset($_SESSION["usu_id"])) {
 ?>
 
 </html>
+} else {
+    /* Si no ha iniciado sesión, se redirecciona a la ventana de error */
+    header("Location:" . Conectar::ruta() . "views/404.php");
+    exit();
+}
