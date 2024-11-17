@@ -1,7 +1,9 @@
 <?php
+session_start();
 define("BASE_URL", "/tallerPagina/views/"); // Ajusta BASE_URL según la estructura de tu proyecto
 require_once("../config/conexion.php");
 
+// Verifica si el usuario ha iniciado sesión
 if (!isset($_SESSION["usu_id"])) {
     // Redirige a una página de error o a la página de inicio de sesión si el usuario no está logueado
     header("Location: " . BASE_URL . "404.php");
@@ -37,12 +39,26 @@ if (!isset($_SESSION["usu_id"])) {
     .info-box i {
       font-size: 2em;
     }
+    .logout-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
   </style>
 </head>
 <body>
 
+<!-- Botón de Cerrar Sesión -->
+<div class="logout-btn">
+  <a href="logout.php" class="btn btn-danger">
+    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+  </a>
+</div>
+
 <div class="container my-4">
   <h1 class="text-center mb-4">Dashboard de Inicio</h1>
+  <p class="text-center">Bienvenido, <strong><?php echo htmlspecialchars($_SESSION["nombre"]); ?></strong>!</p>
+  
   <div class="row">
     <!-- Box 1 -->
     <div class="col-lg-3 col-md-6">

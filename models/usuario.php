@@ -36,7 +36,8 @@ class Usuario extends Conectar {
                         header("Location:" . Conectar::ruta() . "views/inicio.php");
                         exit();
                     } else {
-                        header("Location:" . Conectar::ruta() . "index.php?m=1");
+                        // Redirige al archivo 404.php si los datos son incorrectos
+                        header("Location:" . Conectar::ruta() . "views/404.php");
                         exit();
                     }
                 } else {

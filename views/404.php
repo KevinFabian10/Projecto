@@ -1,23 +1,3 @@
-<?php
-// Define la URL base para redirección (ajusta según la estructura de tu proyecto)
-define("BASE_URL", "/tallerPagina/views/");
-
-// Inicia la sesión si aún no está iniciada
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Incluye el archivo de conexión
-require_once("../config/conexion.php");
-
-// Verifica si el usuario está logueado
-if (!isset($_SESSION["usu_id"])) {
-    // Si no está logueado, redirige a la página de inicio de sesión
-    header("Location: " . BASE_URL . "login.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,19 +17,18 @@ if (!isset($_SESSION["usu_id"])) {
     .error-page {
       max-width: 600px;
       margin: 100px auto;
-      text-align: left;
+      text-align: center;
     }
     .error-page .headline {
       font-size: 100px;
-      float: left;
-      margin-right: 20px;
+      float: none;
+      margin-bottom: 20px;
     }
     .error-page .error-content {
       overflow: hidden;
     }
     .error-page .error-content h3 {
       font-size: 24px;
-      
       margin-top: 0;
     }
     .error-page .error-content p {
@@ -72,7 +51,7 @@ if (!isset($_SESSION["usu_id"])) {
     <div class="error-content">
       <h3><i class="fas fa-exclamation-triangle text-warning"></i> ¡Ups! Página no encontrada.</h3>
       <p>
-        No pudimos encontrar la página que buscabas. Mientras tanto, puedes <a href="../../index.html">regresar al panel de control</a> o intentar usar el formulario de búsqueda.
+        No pudimos encontrar la página que buscabas. Mientras tanto, puedes <a href="../../index.php">regresar al inicio</a>.
       </p>
       <form class="search-form">
         <div class="input-group">

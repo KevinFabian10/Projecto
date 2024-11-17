@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+
 // Asegúrate de incluir el archivo de conexión si es necesario
 require_once("../../config/conexion.php");
 
